@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: DigitalBreakthrough
+      app.kubernetes.io/component: backend-app
+  template:
+    metadata:
+      name: {{ .Release.Name }}-backend
+      labels:
+        app.kubernetes.io/name: DigitalBreakthrough
+        app.kubernetes.io/component: backend-app
+    spec:
+      containers:
+      - image: {{ .Values.deployment.image }}
+        name: {{ .Release.Name }}-backend
+        ports:
+        - name: http
+          containerPort: {{ .Values.deployment.config.port }}
+          protocol: TCP
