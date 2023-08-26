@@ -16,9 +16,13 @@ class Economy(BaseModel):
     LTV: int
 
 
-class GeneratePresentation(BaseModel):
+class Product(BaseModel):
     product_idea: str
-    team: List[TeamMember]
     market: str
     roadmap: str
+
+
+class GeneratePresentation(BaseModel):
+    product: Product
+    team: List[TeamMember]
     economy: Economy
