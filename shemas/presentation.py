@@ -20,6 +20,7 @@ class Product(BaseModel):
     idea: str
     market: str
     roadmap: str
+    field: str
 
 
 class GeneratePresentation(BaseModel):
