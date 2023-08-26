@@ -1,1 +1,1 @@
-from .main import get_average_price
+from .main import get_stat

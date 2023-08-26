@@ -80,19 +80,24 @@ def get_products(headers, url):
     return products
 
 
-def get_average_price(product_field):
+def get_stat(product_field):
     headers = get_headers()
     url = get_url(product_field)
     products = get_products(headers, url)
 
+    stat = {}
     sum_price = 0
     for product in products:
         sum_price += product.salePriceU / 100
+    stat["average_price"] = sum_price / len(products)
+    stat["min_price"] = min([i.salePriceU for i in products]) / 100
+    stat["max_price"] = max([i.salePriceU for i in products]) / 100
+    stat["count"] = len(products)
 
-    return sum_price / len(products)
+    return stat
 
 
 if __name__ == '__main__':
-    get_average_price("носки")
+    get_stat("носки")
 
 
