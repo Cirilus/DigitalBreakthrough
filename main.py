@@ -1,6 +1,8 @@
 import base64
 import http.client
 from pathlib import Path
+import re
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from starlette.middleware.cors import CORSMiddleware
@@ -36,9 +38,22 @@ async def generate_presentation_base64(request: GeneratePresentation):
 
 @app.post("/api/v1/statistics")
 async def get_statistics(request: GeneratePresentation):
+
+    validate_stat(request)
+
     try:
         statistics = get_stat(request.product.field)
     except Exception as e:
         raise HTTPException(status_code=http.client.INTERNAL_SERVER_ERROR, detail="Item not found")
 
     return JSONResponse(content={"statistics": statistics})
+
+
+def validate_stat(request: GeneratePresentation):
+    field = request.product.field
+
+    if field == "":
+        raise HTTPException(status_code=http.client.BAD_REQUEST, detail="The field cannot be empty")
+
+    if re.search(r"[A-Za-z]", field) is None:
+        raise HTTPException(status_code=http.client.BAD_REQUEST, detail="There is at least one letter in the field")
