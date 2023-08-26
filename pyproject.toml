@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "skfo"
+version = "0.1.0"
+description = ""
+authors = ["kirill <shkolenko02-03-2004@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.102.0"}
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
