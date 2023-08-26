@@ -17,7 +17,7 @@ class Economy(BaseModel):
 
 
 class Product(BaseModel):
-    product_idea: str
+    idea: str
     market: str
     roadmap: str
 
