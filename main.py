@@ -53,7 +53,7 @@ def validate_stat(request: GeneratePresentation):
     field = request.product.field
 
     if field == "":
-        raise HTTPException(status_code=http.client.BAD_REQUEST, detail="The field cannot be empty")
+        raise HTTPException(status_code=http.client.BAD_REQUEST, detail="The product field cannot be empty")
 
-    if re.search(r"[A-Za-z]", field) is None:
-        raise HTTPException(status_code=http.client.BAD_REQUEST, detail="There is at least one letter in the field")
+    if re.search(r"^[^0-9]*$", field) is None:
+        raise HTTPException(status_code=http.client.BAD_REQUEST, detail="The number cannot be in product field")
