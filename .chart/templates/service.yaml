@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: DigitalBreakthrough
     app.kubernetes.io/component: service
 spec:
+  type: LoadBalancer
   selector:
     app.kubernetes.io/name: DigitalBreakthrough
     app.kubernetes.io/component: service
