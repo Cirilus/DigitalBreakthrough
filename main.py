@@ -10,6 +10,7 @@ from starlette.middleware.cors import CORSMiddleware
 from shemas import GeneratePresentation
 from parsers import get_stat
 
+
 app = FastAPI()
 
 app.add_middleware(
@@ -28,9 +29,6 @@ async def generate_presentation_binary(request: GeneratePresentation):
 
 @app.post("/api/v1/base64/generate")
 async def generate_presentation_base64(request: GeneratePresentation):
-
-
-
     pdf = Path("test.pdf")
     with open(pdf, 'rb') as pdf_file:
         base64_pdf = base64.b64encode(pdf_file.read()).decode('utf-8')
@@ -40,6 +38,7 @@ async def generate_presentation_base64(request: GeneratePresentation):
 async def get_statistics(request: GeneratePresentation):
 
     validate_stat(request)
+
 
     try:
         statistics = get_stat(request.product.field)
